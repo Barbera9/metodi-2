@@ -1,0 +1,3 @@
+import PrimaParte
+
+PrimaParte.initialize()

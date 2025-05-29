@@ -12,7 +12,7 @@ def _compute_D(N):
     D[1:, :] *= np.sqrt(2 / N)
     return D
 
-def dct_2D(f_mat): # f_mat è matrice quadrata N x N
+def dct_2D(f_mat, plot=False): # f_mat è matrice quadrata N x N
     N = f_mat.shape[0]
     D = _compute_D(N)
     
@@ -26,18 +26,19 @@ def dct_2D(f_mat): # f_mat è matrice quadrata N x N
     for j in range(N):
         c_mat[j, :] = (D @ c_mat[j, :].T).T
     
+    if plot:
     # Plot tipo bar3
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
     
-    x, y = np.meshgrid(range(N), range(N))
-    x = x.flatten()
-    y = y.flatten()
-    z = np.zeros_like(x)
-    dx = dy = 0.5 * np.ones_like(x)
-    dz = c_mat.flatten()
+        x, y = np.meshgrid(range(N), range(N))
+        x = x.flatten()
+        y = y.flatten()
+        z = np.zeros_like(x)
+        dx = dy = 0.5 * np.ones_like(x)
+        dz = c_mat.flatten()
     
-    ax.bar3d(x, y, z, dx, dy, dz, shade=True)
-    plt.show()
+        ax.bar3d(x, y, z, dx, dy, dz, shade=True)
+        plt.show()
     
     return c_mat
