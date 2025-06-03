@@ -15,6 +15,7 @@ def scegli_img():
                 messagebox.showerror("Errore","Immagine non in toni di grigio (modalità L).")
             else:
                 messagebox.showinfo("Selezione andata a buon fine",f"Hai selezionato: \n{filepath}")
+                ##call script principale
 
     except Exception as e:
         messagebox.showerror("Errore", "Impossibile aprire il file: \n{e}")
