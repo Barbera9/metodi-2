@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-def _compute_D(N):
+def compute_D(N):
     # Calcola la matrice D della DCT tipo II (non normalizzata)
     D = np.zeros((N, N))
     for k in range(N):
@@ -14,7 +14,7 @@ def _compute_D(N):
 
 def dct_2D(f_mat, plot=False): # f_mat è matrice quadrata N x N
     N = f_mat.shape[0]
-    D = _compute_D(N)
+    D = compute_D(N)
     
     c_mat = f_mat.copy()
     
@@ -46,7 +46,7 @@ def dct_2D(f_mat, plot=False): # f_mat è matrice quadrata N x N
 
 def idct_2D(c_mat):
     N = c_mat.shape[0]
-    D= _compute_D(N)
+    D= compute_D(N)
     f_mat=c_mat.copy()
 
     #righe

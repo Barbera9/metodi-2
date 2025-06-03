@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from PIL import Image
+import compressione
 
 def scegli_img():
     msg1= "Seleziona un'immagine BMP in toni di grigio"
@@ -16,9 +17,11 @@ def scegli_img():
             else:
                 messagebox.showinfo("Selezione andata a buon fine",f"Hai selezionato: \n{filepath}")
                 ##call script principale
+                compressione.imageCompression(filepath)
+
 
     except Exception as e:
-        messagebox.showerror("Errore", "Impossibile aprire il file: \n{e}")
+        messagebox.showerror("Errore", f"Impossibile aprire il file: \n{e}")
 
 root = tk.Tk()
 root.title("Selezione Immagine BMP")
