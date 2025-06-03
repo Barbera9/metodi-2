@@ -23,8 +23,8 @@ def dct_2D(f_mat, plot=False): # f_mat è matrice quadrata N x N
         c_mat[:, j] = D @ c_mat[:, j]
         
     # DCT per righe
-    for j in range(N):
-        c_mat[j, :] = (D @ c_mat[j, :].T).T
+    for i in range(N):
+        c_mat[i, :] = (D @ c_mat[i, :].T).T
     
     if plot:
     # Plot tipo bar3
@@ -42,3 +42,18 @@ def dct_2D(f_mat, plot=False): # f_mat è matrice quadrata N x N
         plt.show()
     
     return c_mat
+
+
+def idct_2D(c_mat):
+    N = c_mat.shape[0]
+    D= _compute_D(N)
+    f_mat=c_mat.copy()
+
+    #righe
+    for i in range(N):
+        f_mat[i, :] = (D.T @ f_mat[i, :].T).T
+    #colonne
+    for j in range(N):
+        f_mat[:, j] = D.T @ f_mat[:, j]
+
+    return f_mat
