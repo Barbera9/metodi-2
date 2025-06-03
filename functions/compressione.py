@@ -18,17 +18,20 @@ def imageCompression(filepath):
     d = simpledialog.askinteger("Soglia Frequenze", f"inserisci d (min: 0 max: {max_d}):", minvalue=0, maxvalue=max_d)
     if d is None:
         return
-    
+    #ritaglio immagine in multiplidi F
     h, w =img_array.shape
     H = h- (h%F)
     W = w- (w%F)
     img_crop= img_array[:H,:W]
+    #prep imm risultante
     result = np.zeros_like(img_crop, dtype=np.float32)
 
+    #applicazione dct2 ed idct2 per blocchi
     for i in range(0,H,F):
         for j in range(0,W,F):
             block=img_crop[i:i+F,j:j+F]
             c=dct_2D(block)
+            #eliminazione frequenze con k+l >= d
             for k in range(F):
                 for l in range(F):
                     if k+l >= d:
@@ -37,7 +40,9 @@ def imageCompression(filepath):
             f_recon = np.rint(f_recon).clip(0, 255)
             result[i:i+F, j:j+F] = f_recon
     
-    fig, axs = plt.subplots(1,2,figsize=(10,5))
+    #mostr risultato
+    fig, axs = plt.subplots(1,2,figsize=(10,5)) 
+    #fig è necessario anche se non usato: è per definire i due sotto-plot axs
     axs[0].imshow(img_array, cmap="gray")
     axs[0].set_title("Originale")
     axs[0].axis("off")
