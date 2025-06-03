@@ -9,7 +9,7 @@ def menu(stdscr):
     #disattiva cursore
     curses.curs_set(0)
     #opzioni
-    options =["Prima Parte","Seconda Parte"]
+    options =["Prima Parte","Seconda Parte","close"]
     current_sel=0
 
     while True:
@@ -39,10 +39,12 @@ def menu(stdscr):
                script_path= os.path.join(base_path,"PrimaParte.py")
             elif current_sel==1:
                 script_path= os.path.join(base_path, "secondaParte.py")
+            elif current_sel ==2:
+                break
 
             subprocess.run(["python",script_path])
-            stdscr.getch()
-            break
+            #stdscr.getch()
+            #break
         
         stdscr.refresh()
 

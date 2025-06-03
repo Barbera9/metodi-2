@@ -27,7 +27,8 @@ root.geometry("400x150") #dimensione iniziale della finestra in pixel
 #pulsanti di controllo dimesioni finestra e simili
 root.resizable(True,True)
 frame = tk.Frame(root)
-frame.pack(pady=10)
+
+frame.pack(pady=10,expand=True)
 
 
 btn=tk.Button(frame, text="Scegli un immagine .bmp", command=scegli_img)
