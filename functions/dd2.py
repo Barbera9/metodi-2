@@ -5,14 +5,17 @@ from mpl_toolkits.mplot3d import Axes3D
 def compute_D(N):
     # Calcola la matrice D della DCT tipo II (non normalizzata)
     D = np.zeros((N, N))
+    alpha_vect = np.zeros(N)
+    alpha_vect[0]= N** -0.5 # N ^ -0.5
+    alpha_vect[1:] = (N** -0.5)*np.sqrt(2)
+
     for k in range(N):
         for n in range(N):
-            D[k, n] = np.cos(np.pi * k * (2 * n + 1) / (2 * N))
-    D[0, :] *= 1 / np.sqrt(N)
-    D[1:, :] *= np.sqrt(2 / N)
+            D[k, n] = alpha_vect[k] * np.cos(k * np.pi * (2 * n + 1) / (2 * N)) # formula leggermente diversa per il cambio base, python è zero-based
+
     return D
 
-def dct_2D(f_mat, plot=False): # f_mat è matrice quadrata N x N
+def dct_2D(f_mat): # f_mat è matrice quadrata N x N
     N = f_mat.shape[0]
     D = compute_D(N)
     
@@ -24,22 +27,7 @@ def dct_2D(f_mat, plot=False): # f_mat è matrice quadrata N x N
         
     # DCT per righe
     for i in range(N):
-        c_mat[i, :] = (D @ c_mat[i, :].T).T
-    
-    if plot:
-    # Plot tipo bar3
-        fig = plt.figure()
-        ax = fig.add_subplot(111, projection='3d')
-    
-        x, y = np.meshgrid(range(N), range(N))
-        x = x.flatten()
-        y = y.flatten()
-        z = np.zeros_like(x)
-        dx = dy = 0.5 * np.ones_like(x)
-        dz = c_mat.flatten()
-    
-        ax.bar3d(x, y, z, dx, dy, dz, shade=True)
-        plt.show()
+        c_mat[i, :] = (D @ c_mat[i, :].T).T 
     
     return c_mat
 

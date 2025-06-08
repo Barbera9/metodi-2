@@ -20,13 +20,13 @@ for N in Ns:
 
     # Tempo DCT fatta in casa
     start = time.time()
-    dd2.dct_2D(f)
+    A=dd2.dct_2D(f)
     end = time.time()
     times_homemade.append(end - start)
 
     # Tempo DCT libreria
     start = time.time()
-    dct2_library(f)
+    B=dct2_library(f)
     end = time.time()
     times_library.append(end - start)
 
