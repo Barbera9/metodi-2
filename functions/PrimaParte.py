@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import time
 from scipy.fftpack import dct
 import dd2
+import subprocess
 
 def dct2_library(f_mat):
     return dct(dct(f_mat.T, norm='ortho').T, norm='ortho')
@@ -19,16 +20,19 @@ for N in Ns:
     f = np.random.rand(N, N)
 
     # Tempo DCT fatta in casa
-    start = time.time()
+    start = time.perf_counter()
     A=dd2.dct_2D(f)
-    end = time.time()
-    times_homemade.append(end - start)
+    end = time.perf_counter()
+    homemadeTime=end-start
+    times_homemade.append(homemadeTime)
 
     # Tempo DCT libreria
-    start = time.time()
+    start = time.perf_counter()
     B=dct2_library(f)
-    end = time.time()
-    times_library.append(end - start)
+    end = time.perf_counter()
+    libraryTime=end-start
+    times_library.append(libraryTime)
+    
 
     # Plot
 plt.figure(figsize=(10, 6))
@@ -41,3 +45,4 @@ plt.legend()
 plt.grid(True, which='both', linestyle='--', linewidth=0.5)
 plt.tight_layout()
 plt.show()
+
