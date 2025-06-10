@@ -1,9 +1,7 @@
-#import PrimaParte
 import curses
 import subprocess
 import os
 
-#print("start")
 
 def menu(stdscr):
     #disattiva cursore
@@ -25,7 +23,6 @@ def menu(stdscr):
         key = stdscr.getch()   
     
         #gestione movimeto selezione
-
         if key == curses.KEY_UP and current_sel > 0:
             current_sel -= 1
 
@@ -50,4 +47,3 @@ def menu(stdscr):
 
 curses.wrapper(menu)
     
-#PrimaParte.initialize()
