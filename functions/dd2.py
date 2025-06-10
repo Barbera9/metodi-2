@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 def compute_D(N):
-    # Calcola la matrice D della DCT tipo II (non normalizzata)
+    # Calcola la matrice D della DCT tipo II 
     D = np.zeros((N, N))
     alpha_vect = np.zeros(N)
     alpha_vect[0]= N** (-0.5) # N ^ -0.5
