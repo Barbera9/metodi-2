@@ -13,7 +13,8 @@ def scegli_img():
     try:
         with Image.open(filepath) as img:
             if img.mode != "L":
-                messagebox.showerror("Errore","Immagine non in toni di grigio (modalità L).")
+                messagebox.showinfo("Attenzione",f"Immagine \n{filepath} non in toni di grigio (modalità L), verrà convertita")
+                compressione.imageCompression(filepath)
             else:
                 messagebox.showinfo("Selezione andata a buon fine",f"Hai selezionato: \n{filepath}")
                 ##call script principale

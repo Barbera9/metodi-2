@@ -6,8 +6,8 @@ def compute_D(N):
     # Calcola la matrice D della DCT tipo II (non normalizzata)
     D = np.zeros((N, N))
     alpha_vect = np.zeros(N)
-    alpha_vect[0]= N** -0.5 # N ^ -0.5
-    alpha_vect[1:] = (N** -0.5)*np.sqrt(2)
+    alpha_vect[0]= N** (-0.5) # N ^ -0.5
+    alpha_vect[1:] = (N** (-0.5))*np.sqrt(2)
 
     for k in range(N):
         for n in range(N):
@@ -28,6 +28,9 @@ def dct_2D(f_mat): # f_mat è matrice quadrata N x N
     # DCT per righe
     for i in range(N):
         c_mat[i, :] = (D @ c_mat[i, :].T).T 
+
+    # c_mat = D @ f_mat @ D.T
+    
     
     return c_mat
 
@@ -43,5 +46,8 @@ def idct_2D(c_mat):
     #colonne
     for j in range(N):
         f_mat[:, j] = D.T @ f_mat[:, j]
+    
+    #f_mat = D.T @ C_mat @ D
+
 
     return f_mat

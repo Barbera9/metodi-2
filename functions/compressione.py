@@ -4,6 +4,7 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 from dd2 import dct_2D, idct_2D
+from scipy.fftpack import dct, idct
 
 
 def imageCompression(filepath):
@@ -31,13 +32,13 @@ def imageCompression(filepath):
     for i in range(0,H,F):
         for j in range(0,W,F):
             block=img_crop[i:i+F,j:j+F]  # divisione in blocchi FxF
-            c=dct_2D(block)
+            c = dct(dct(block.T, norm='ortho').T, norm='ortho')
             #eliminazione frequenze con k+l >= d
             for k in range(F):
                 for l in range(F):
                     if k+l >= d:
                         c[k,l]=0 #eliminazione di frequenze k+l >=d
-            f_recon = idct_2D(c) #ricostruzione blocco vi idct
+            f_recon= idct(idct(block.T, norm='ortho').T, norm='ortho')
             f_recon = np.rint(f_recon).clip(0, 255) #blocco ricostruito ed arrotondato e normalizzato 0,255
             result[i:i+F, j:j+F] = f_recon # inserimento nell' immagine finale
     
