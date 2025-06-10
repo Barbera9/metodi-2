@@ -7,9 +7,11 @@ from dd2 import dct_2D, idct_2D
 from scipy.fftpack import dct, idct
 
 
-def imageCompression(filepath):
+def imageCompression(filepath,msg="base"):
     img = Image.open(filepath).convert("L") #converte l'immagine in bianco  nero
     img_array = np.array(img) # è una matrice np con valori da 0 a 255, prende come input l'imm BW
+
+    isbase = msg == "base" # default true
 
     F=simpledialog.askinteger("Blocco DCT", "Inserisci F (min: 1 , max:128):", minvalue=1,maxvalue=128)
     if F is None:
@@ -32,14 +34,14 @@ def imageCompression(filepath):
     for i in range(0,H,F):
         for j in range(0,W,F):
             block=img_crop[i:i+F,j:j+F]  # divisione in blocchi FxF
-            c = dct(dct(block.T, norm='ortho').T, norm='ortho')
+            c = dct(dct(block.T, norm='ortho').T, norm='ortho') if isbase else dct_2D(block)
             #c = dct_2D(block)
             #eliminazione frequenze con k+l >= d
             for k in range(F):
                 for l in range(F):
                     if k+l >= d:
                         c[k,l]=0 #eliminazione di frequenze k+l >=d
-            f_recon= idct(idct(block.T, norm='ortho').T, norm='ortho')
+            f_recon= idct(idct(block.T, norm='ortho').T, norm='ortho') if isbase else idct_2D(block)
             #f_recon=idct_2D(block)
             f_recon = np.rint(f_recon).clip(0, 255) #blocco ricostruito ed arrotondato e normalizzato 0,255
             result[i:i+F, j:j+F] = f_recon # inserimento nell' immagine finale

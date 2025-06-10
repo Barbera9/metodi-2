@@ -7,7 +7,7 @@ def menu(stdscr):
     #disattiva cursore
     curses.curs_set(0)
     #opzioni
-    options =["Prima Parte","Seconda Parte","close"]
+    options =["Prima Parte","Seconda Parte","Seconda Parte Alt","close"]
     current_sel=0
 
     while True:
@@ -37,11 +37,15 @@ def menu(stdscr):
             elif current_sel==1:
                 script_path= os.path.join(base_path, "secondaParte.py")
             elif current_sel ==2:
+                script_path= os.path.join(base_path, "secondaParte.py")
+                value = "Alt"
+            elif current_sel ==3:
                 break
+            if current_sel != 2:
+                subprocess.run(["python",script_path])
+            else:
+                subprocess.run(["python", script_path, value])
 
-            subprocess.run(["python",script_path])
-            #stdscr.getch()
-            #break
         
         stdscr.refresh()
 
