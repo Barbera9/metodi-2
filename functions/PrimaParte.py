@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import time
 from scipy.fftpack import dct
 import dd2
-import subprocess
 
 def dct2_library(f_mat):
     return dct(dct(f_mat.T, norm='ortho').T, norm='ortho')
