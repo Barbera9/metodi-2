@@ -27,7 +27,7 @@ def dct_2D(f_mat): # f_mat è matrice quadrata N x N
         
     # DCT per righe
     for i in range(N):
-        c_mat[i, :] = (D @ c_mat[i, :].T).T 
+        c_mat[i, :] = D @ c_mat[i, :]
 
     # c_mat = D @ f_mat @ D.T
     
@@ -42,7 +42,7 @@ def idct_2D(c_mat):
 
     #righe
     for i in range(N):
-        f_mat[i, :] = (D.T @ f_mat[i, :].T).T
+        f_mat[i, :] = D.T @ f_mat[i, :]
     #colonne
     for j in range(N):
         f_mat[:, j] = D.T @ f_mat[:, j]

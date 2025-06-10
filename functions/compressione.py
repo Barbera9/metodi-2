@@ -33,12 +33,14 @@ def imageCompression(filepath):
         for j in range(0,W,F):
             block=img_crop[i:i+F,j:j+F]  # divisione in blocchi FxF
             c = dct(dct(block.T, norm='ortho').T, norm='ortho')
+            #c = dct_2D(block)
             #eliminazione frequenze con k+l >= d
             for k in range(F):
                 for l in range(F):
                     if k+l >= d:
                         c[k,l]=0 #eliminazione di frequenze k+l >=d
             f_recon= idct(idct(block.T, norm='ortho').T, norm='ortho')
+            #f_recon=idct_2D(block)
             f_recon = np.rint(f_recon).clip(0, 255) #blocco ricostruito ed arrotondato e normalizzato 0,255
             result[i:i+F, j:j+F] = f_recon # inserimento nell' immagine finale
     
