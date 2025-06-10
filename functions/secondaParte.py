@@ -37,10 +37,4 @@ frame.pack(pady=10,expand=True)
 btn=tk.Button(frame, text="Scegli un immagine .bmp", command=scegli_img)
 btn.grid(row=0,column=0,padx=10)
 
-#btn_max = tk.Button(frame, text="Maximizza", command=lambda: root.state("zoomed"))
-#btn_max.grid(row=0, column=1, padx=10)
-
-#btn_min = tk.Button(frame, text="Minimizza", command=lambda: root.iconify())
-#btn_min.grid(row=0, column=2, padx=10)
-
 root.mainloop() #avvia ciclo principale per interfaccia grafica
