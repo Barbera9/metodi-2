@@ -13,9 +13,7 @@ f=np.array([[231, 32, 233, 161, 24, 71, 140, 245],
     [193, 70, 174, 167, 41, 30, 127, 245],
     [87, 149, 57, 192, 65, 129, 178, 228]], dtype=float)
 
-
 c= dct_2D(f)
-
 print( "DCT2 :")
 #np.set_printoptions(precision=2, suppress=True)
 np.set_printoptions(formatter={'float_kind':lambda x:f"{x:.2e}"})
